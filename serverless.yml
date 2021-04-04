@@ -5,7 +5,7 @@ provider:
   stage: dev
 functions:
   hello:
-    handler: ./handler.hello
+    handler: dist/handler.hello
     events:
       - http:
           path: hello
