@@ -11,3 +11,10 @@ functions:
           path: hello
           method: GET
           cors: true
+  badHello:
+    handler: dist/anotherHandler.hello
+    events:
+      - http:
+          path: hello-bad
+          method: GET
+          cors: true

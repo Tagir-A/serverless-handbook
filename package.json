@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "esbuild handler.ts --bundle --outfile=dist/handler.js --platform=node --target=node12",
-    "build:prod": "esbuild handler.ts --bundle --outfile=dist/handler.js --platform=node --target=node12 --minify",
+    "build": "node ./build.js",
+    "build:prod": "node ./buildProd.js",
     "deploy": "npm run build:prod && serverless deploy"
   },
   "repository": {
