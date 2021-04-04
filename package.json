@@ -1,0 +1,22 @@
+{
+  "name": "serverless-handbook",
+  "version": "1.0.0",
+  "description": "So far this project uses: - serverless - aws",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Tagir-A/serverless-handbook.git"
+  },
+  "author": "tagir-a",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Tagir-A/serverless-handbook/issues"
+  },
+  "homepage": "https://github.com/Tagir-A/serverless-handbook#readme",
+  "dependencies": {
+    "serverless": "^2.33.1"
+  }
+}
