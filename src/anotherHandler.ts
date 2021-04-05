@@ -4,6 +4,6 @@ export const hello = async (event: APIGatewayEvent) => {
 
   return {
     statusCode: 200,
-    body: JSON.stringify({ msg: 'Hello there, ugly!', eMethod: event.httpMethod })
+    body: JSON.stringify({ msg: 'Hello there, ugly!!', eMethod: event.httpMethod })
   }
 }
