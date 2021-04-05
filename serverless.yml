@@ -1,8 +1,24 @@
 service: hello-world
+variablesResolutionMode: "20210326"
 provider:
   name: aws
   runtime: nodejs12.x
   stage: dev
+  lambdaHashingVersion: "20201221"
+  environment:
+    ITEM_TABLE: ${self:service}-items-${self:provider.stage}
+  iam:
+    role:
+      statements:
+        - Effect: Allow
+          Resource: "arn:aws:dynamodb::*:table/${self:provider.environment.ITEM_TABLE}"
+          Action:
+            - dynamodb:Query
+            - dynamodb:Scan
+            - dynamodb:GetItem
+            - dynamodb:PutItem
+            - dynamodb:UpdateItem
+            - dynamodb:DeleteItem
 functions:
   hello:
     handler: dist/handler.hello
@@ -18,3 +34,43 @@ functions:
           path: hello-bad
           method: GET
           cors: true
+  getItems:
+    handler: dist/manageItems.getItem
+    events:
+      - http:
+          path: item/{itemId}
+          method: GET
+          cors: true
+  updateItems:
+    handler: dist/manageItems.updateItem
+    events:
+      - http:
+          path: item
+          method: POST
+          cors: true
+      - http:
+          path: item/{itemId}
+          method: POST
+          cors: true
+  deleteItems:
+    handler: dist/manageItems.deleteItem
+    events:
+      - http:
+          path: item/{itemId}
+          method: DELETE
+          cors: true
+resources:
+  Resources:
+    UsersTable:
+      Type: "AWS::DynamoDB::Table"
+      Properties:
+        AttributeDefinitions:
+          - AttributeName: itemId
+            AttributeType: S
+        KeySchema:
+          - AttributeName: itemId
+            KeyType: HASH
+        ProvisionedThroughput:
+          ReadCapacityUnits: 1
+          WriteCapacityUnits: 1
+        TableName: ${self:provider.environment.ITEM_TABLE}
